@@ -21,9 +21,10 @@ def login(username, password, users, cred_admin):
                     buscar_usuario(usuarios_path, usuario_buscar) 
                     
             valid_ingreso = True
-    else:
+    else: 
+        cont = 0
         for user in users:
-            if (username == users["Usuario"]) and password == users["Contrasena"]:
+            if (username == users[cont]["Usuario"]) and (password == users[cont]["Contrasena"]):
                 print("---------------------------------------------------------------")
                 print("                        PANEL USUARIO                          ")
                 print("---------------------------------------------------------------")
@@ -31,15 +32,15 @@ def login(username, password, users, cred_admin):
                 valid_ingreso = True
                 break
             cont += 1
-        print("Nombre de usuario o contraseña incorrectos.")
-        valid_ingreso = False
-        
+        else:
+            valid_ingreso = None
+
     return valid_ingreso
     
 def registrar(users):
-        print("---------------------------------------------------------------")
-        print("                         REGISTRARSE                            ")
-        print("---------------------------------------------------------------")
+        print("""---------------------------------------------------------------
+                        REGISTRARSE                            
+---------------------------------------------------------------""")
 
         new_user = input("Ingrese su nuevo usuario: ")
         new_password = input("Ingrese su nueva contraseña: ")
@@ -52,4 +53,6 @@ def registrar(users):
             "Estado": "Activo"
         })
         guardar_usuarios(users)
-        print("¡Registro exitoso! Ahora puedes iniciar sesión con tus credenciales.")            
+        print("¡Registro exitoso! Ahora puedes iniciar sesión con tus credenciales.")
+        return new_user, new_password
+

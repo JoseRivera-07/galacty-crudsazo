@@ -5,7 +5,7 @@ import csv
 def guardar_usuarios(users, archivo="usuarios.csv"):
     import csv
     with open(archivo, mode='w', newline='') as file:
-        writer = csv.DictWriter(file, fieldnames=["Nombre", "Especie", "Usuario", "Contrasena"])
+        writer = csv.DictWriter(file, fieldnames=["Nombre", "Especie", "Usuario", "Contrasena", "Estado"])
         writer.writeheader()
         writer.writerows(users)
         
@@ -75,6 +75,6 @@ def buscar_usuario(path_csv, usuario):
     except FileNotFoundError:
         print("No se encontró el archivo de usuarios.")
         
-def actualizar(path_csv, password):
+"""def actualizar(path_csv, password):
     try:
-        
+        """

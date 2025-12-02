@@ -3,35 +3,43 @@ from storage import *
 from auth import *
 
 
-
-print("--------------------------------------------------------------")
-print("Bienvenido a galáctic library. ¿Que deseas hacer el dia de hoy")
-print("--------------------------------------------------------------")
-menu = input("1. Iniciar sesion \n2. Registrarse \n3. Ver vitrina de artefáctos encontrados \n4. Misiones disponibles: ")
 users = cargar_usuarios("usuarios.csv")
 cred_admin = cargar_admin("admin_access.csv")
+menu = 0
+while menu != "5":
+    print("""--------------------------------------------------------------
+Bienvenido a galáctic library. ¿Que deseas hacer el dia de hoy
+--------------------------------------------------------------""")
+    menu = input("1. Iniciar sesion \n2. Registrarse \n3. Ver vitrina de artefáctos encontrados \n4. Misiones disponibles \n5. Salir: ")
+    match menu:
+        case "1":
+            print("""---------------------------------------------------------------
+                        INICIO DE SESION                       
+---------------------------------------------------------------""")
+            intentos = 0        
 
-match menu:
-    case "1":
-        print("---------------------------------------------------------------")
-        print("                        INICIO DE SESION                       ")
-        print("---------------------------------------------------------------")
-
-        username = input("Usuario: ")
-        password = input("Contraseña: ")
-        intentos = 0        
-        valid_ingreso = login(username, password, users, cred_admin)
-        if valid_ingreso == False:
-            intentos += 1
             while intentos < 3:
-                print(f"Intento {intentos + 1} de 3")
                 username = input("Usuario: ")
                 password = input("Contraseña: ")
-                if login(username, password, users) is not None:
-                    break
-                intentos += 1
-            if intentos == 3:
-                print("Has excedido el número máximo de intentos. Inténtalo más tarde.") 
-        
-    case "2":
-        registrar(users)
+                valid_ingreso = login(username, password, users, cred_admin)
+                if valid_ingreso == None:
+                    print("Nombre de usuario o contraseña incorrectos.")
+                    intentos += 1
+                else:
+                    intentos = 3
+    
+        case "2":
+            user, psw = registrar(users)
+            valid_ingreso = (user, psw, cred_admin, users)
+        case _:
+            print("""Opción no válida, por favor intente de nuevo....
+                  
+            -----------------------------------------------
+                  Retornando al menú principal.""")
+
+"""
+3. Para la vitrina de artefactos encontrados pienso listarlo como listé en el trabajo de los libros
+
+4. Con las misiones disponibles las haré como ranking de objetos a encontrar, y los categorizaré como comun, raro, epico, legendario
+    cada mision solo podrá ser tomada por un usuario que esté logueado, se verá desde la pantalla del usuario y ahi se le asignará el objeto
+"""  
