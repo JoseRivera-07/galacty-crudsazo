@@ -1,7 +1,6 @@
 #leer y escribir en el csv
 import csv
 
-
 def guardar_usuarios(users, archivo="usuarios.csv"):
     import csv
     with open(archivo, mode='w', newline='') as file:
@@ -75,6 +74,29 @@ def buscar_usuario(path_csv, usuario):
     except FileNotFoundError:
         print("No se encontró el archivo de usuarios.")
         
-"""def actualizar(path_csv, password):
+def cargar_misiones(path_csv):
+    misiones =[]
     try:
-        """
+        with open(path_csv, newline="", encoding="utf-8") as archivo:
+            lector = csv.DictReader(archivo)
+            for fila in lector:
+                misiones.append({
+                    "id": fila["id"],
+                    "nombre": fila["nombre"],
+                    "dificultad": fila["dificultad"],
+                    "descripcion": fila["descripcion"],
+                    "objetivo": fila["objetivo"],
+                    "recompensa": fila["recompensa"]
+                })
+    except FileNotFoundError:
+        print("No se encontró el archivo de misiones")
+    return misiones
+
+def guardar_misiones(misiones, archivo="misiones.csv"):
+    import csv
+    with open(archivo, mode='w', newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=["id", "nombre", "dificultad", "descripcion", "objetivo", "recompensa"])
+        writer.writeheader()
+        writer.writerows(misiones)
+        
+    print("Misiones guardadas correctamente en", archivo)

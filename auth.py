@@ -1,25 +1,14 @@
 #inicio de sesion
 from storage import *
 import csv
+from paneles import panel_admin
 usuarios_path = "usuarios.csv"
 
 
 
 def login(username, password, users, cred_admin):
     if password ==  cred_admin[1] and username == cred_admin[0]:
-            print("---------------------------------------------------------------")
-            print("                      PANEL ADMINISTRADOR                      ")
-            print("---------------------------------------------------------------")
-            #funciones admin: listar visitantes, buscar visitantes por id(posiblemente tambien lo pueda hacer el usuario normal), ver misiones, agregar misiones, eliminar misiones, modificar misiones, estadisticas(contar visitantes, visitantes por especie, visitantes activos y retirados), artefactos
-            menu = input("1. Listar visitantes \n2. Buscar visitante por username \n3. Ver misiones \n4. Agregar misiones \n5. Eliminar misiones \n6. Modificar misiones \n7. Estadísticas \n8. Gestionar artefactos: ")
-            
-            match menu:
-                case "1": 
-                    mostrar_usuarios(usuarios_path)  
-                case "2":
-                    usuario_buscar = input("Ingrese el nombre de usuario a buscar: ")
-                    buscar_usuario(usuarios_path, usuario_buscar) 
-                    
+            panel_admin(username)
             valid_ingreso = True
     else: 
         cont = 0

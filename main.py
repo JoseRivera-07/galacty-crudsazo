@@ -1,6 +1,6 @@
 import csv
 from storage import *
-from auth import *
+from auth import login, registrar
 
 
 users = cargar_usuarios("usuarios.csv")
