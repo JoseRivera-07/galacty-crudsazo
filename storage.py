@@ -53,6 +53,7 @@ def mostrar_usuarios(path_csv):
                 print(f"  Contraseña: {fila['Contrasena']}")
                 print(f"  Estado:     {fila['Estado']}")
                 print("---------------------------------------")
+
     except FileNotFoundError:
         print("No se encontró el archivo de usuarios.")
 
@@ -61,8 +62,9 @@ def buscar_usuario(path_csv, usuario):
         with open(path_csv, newline="", encoding="utf-8") as archivo:
             lector = csv.DictReader(archivo)
             for i, fila in enumerate(lector, start=1):
-                print(f"Usuario #{i}")
+                
                 if fila["Usuario"] == usuario:
+                    print(f"Usuario #{i}")
                     print(f"  Nombre:     {fila['Nombre']}")
                     print(f"  Especie:    {fila['Especie']}")
                     print(f"  Usuario:    {fila['Usuario']}")

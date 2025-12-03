@@ -1,6 +1,7 @@
 import csv
 from storage import *
 from auth import login, registrar
+from admin_crud import ver_misiones_disponibles
 
 
 users = cargar_usuarios("usuarios.csv")
@@ -31,11 +32,16 @@ Bienvenido a galáctic library. ¿Que deseas hacer el dia de hoy
         case "2":
             user, psw = registrar(users)
             valid_ingreso = (user, psw, cred_admin, users)
+        case "3":
+            print("Función de vitrina de artefactos en desarrollo...")
+        case "4":
+            ver_misiones_disponibles()
+        case "5":
+            print("Saliendo del programa, hasta luego!")
         case _:
-            print("""Opción no válida, por favor intente de nuevo....
-                  
-            -----------------------------------------------
-                  Retornando al menú principal.""")
+            print("""Opción no válida, por favor intente de nuevo....                  
+-----------------------------------------------
+        Retornando al menú principal.""")
 
 """
 3. Para la vitrina de artefactos encontrados pienso listarlo como listé en el trabajo de los libros
